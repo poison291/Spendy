@@ -1,26 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
+import { UserButton } from '@clerk/clerk-react';
 
 export default function Navbar() {
+  const {user} = useUser()
   return (
-    <div className="bg-gray-700 mx-5 absolute text-white w-64 h-[80vh] my-[10vh] px-6 rounded-xl shadow-md flex flex-col justify-between select-none">
-
-      <ul className="space-y-4">
-        <li className="hover:bg-gray-400 px-4 mt-5 py-2 rounded-md cursor-pointer">
-          <Link to="/dashboard" className="w-full h-full block py-2 px-4">Dashboard</Link>
-        </li>
-        <li className="hover:bg-gray-400 px-4 py-2 rounded-md cursor-pointer">
-          <Link to="/income" className="w-full h-full block py-2 px-4">Income</Link>
-        </li>
-        <li className="hover:bg-gray-400 px-4 py-2 rounded-md cursor-pointer">
-          <Link to="/expenses" className="w-full h-full block py-2 px-4">Expenses</Link>
-        </li>
-      </ul>
-      <ul className="space-y-4">
-        <li className="hover:bg-gray-400 px-4 mb-5 py-2 rounded-md cursor-pointer">
-          <Link to="/about" className="w-full h-full block py-2 px-4">About Us</Link>
-        </li>
-      </ul>
-    </div>
+    <>
+       <div className="sticky top-0 z-10 bg-gray-800 text-white p-4 shadow-md">
+        <div className="flex justify-between items-center">
+          <ul className="flex space-x-12">
+            <li>
+              <Link to='/dashboard' className="hover:text-teal-500">Dashboard</Link>
+            </li>
+            <li>
+              <Link to='/entry' className="hover:text-teal-500">New Entry</Link>
+            </li>
+            <li>
+              <Link to='/history' className="hover:text-teal-500">Transaction History</Link>
+            </li>
+          </ul>
+          <div>
+            <UserButton className="bg-teal-500 hover:bg-teal-400 px-4 py-2 rounded-full" />
+          </div>
+        </div>
+        <h1 className='mt-5 text-gray-500 font-bold text-xl hover:text-gray-200'>Welcome {user?.firstName}! Here's Your Finance...</h1>
+      </div>
+    </>
   );
 }

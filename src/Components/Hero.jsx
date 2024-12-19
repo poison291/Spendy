@@ -16,6 +16,8 @@ export default function Hero() {
     }
   }, [isLoaded, isSignedIn, navigate]);
 
+
+
   return (
     <>
       <Navbar />

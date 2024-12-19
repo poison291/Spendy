@@ -154,7 +154,7 @@ export default function Entry() {
           onClick={handleSubmit}
           className="w-full px-4 py-2 bg-green-500 text-white font-semibold rounded shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
         >
-          Submit
+          Add Transaction
         </button>
       </div>
     </div>

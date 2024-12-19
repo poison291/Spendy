@@ -17,7 +17,6 @@ const app = express();
 
 app.use(bodyParser.json());
 
-
 app.post('/api/transaction', async (req, res) => {
   const { userId, title, amount, description, date, category, type, payment } = req.body;
 

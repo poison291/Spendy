@@ -39,7 +39,7 @@ export default function Entry() {
     console.log("Transaction Submitted:", transaction);
   
     try {
-      const response = await fetch('https://spendy-mt2k.onrender.com/api/transaction', {
+      const response = await fetch('http://localhost:3001/api/transaction', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

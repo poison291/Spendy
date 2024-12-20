@@ -11,7 +11,7 @@ export default function History() {
   useEffect(() => {
     if (user) {
       // Make sure to use the correct URL with the userId in the URL parameter
-      axios.get(`https://spendy-mt2k.onrender.com/api/transaction/${user.id}`)
+      axios.get(`http://localhost:3001/api/transaction/${user.id}`)
         .then((response) => {
           console.log('Transactions fetched:', response.data); // Debugging
           setTransactions(response.data); // Set the fetched transactions

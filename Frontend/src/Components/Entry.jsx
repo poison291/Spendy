@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useUser } from "@clerk/clerk-react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Entry() {
   const { user } = useUser();
@@ -14,7 +17,8 @@ export default function Entry() {
   const incomeCategory = ["Salary", "Wages", "Interest", "Freelance", "Investments", "Others"];
   const expenseCategories = ["Rent", "Groceries", "Utilities", "Health", "Education", "Travel Expenses", "Others"];
 
-  const handleSubmit = () => {
+  const handleSubmit =async () => {
+    
     if (!title || !amount || !desc || !date || !category || !type || !payment) {
       alert("Please fill in all fields.");
       return; 
@@ -29,23 +33,34 @@ export default function Entry() {
       category,
       type,
       payment,
+      userId: user.id,
     };
-  
+    
     console.log("Transaction Submitted:", transaction);
   
-    setTitle("");
-    setAmount("");
-    setDesc("");
-    setDate("");
-    setCategory("");
-    setType("");
-    setPayment("");
-  
-    alert("Transaction submitted successfully!");
+    try {
+      const response = await fetch('http://localhost:3001/api/transaction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(transaction),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        toast.success("Transaction Added Succesfuly!");
+      } else {
+        alert('Error adding transaction: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      
+    }
   };
-  
 
   return (
+        <>
     <div className="min-h-screen bg-gray-800 flex items-center justify-center">
       <div className="flex flex-col items-center p-6 space-y-4 bg-gray-50 border border-gray-300 rounded-lg max-w-md w-full">
         <h1 className="font-bold text-xl font-mono text-gray-800">Add Transaction</h1>
@@ -166,5 +181,7 @@ export default function Entry() {
         </button>
       </div>
     </div>
+    <ToastContainer/>
+    </>
   );
 }

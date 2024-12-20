@@ -12,7 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
-backend/spendy-41ea7-firebase-adminsdk-bb0yz-95988c3e61.json
+backend/spendycredit.json
 
 # Editor directories and files
 .vscode/*

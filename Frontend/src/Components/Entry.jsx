@@ -15,6 +15,12 @@ export default function Entry() {
   const expenseCategories = ["Rent", "Groceries", "Utilities", "Health", "Education", "Travel Expenses", "Others"];
 
   const handleSubmit = () => {
+    if (!title || !amount || !desc || !date || !category || !type || !payment) {
+      alert("Please fill in all fields.");
+      return; 
+    }
+  
+    // Create the transaction object
     const transaction = {
       title,
       amount,
@@ -24,11 +30,9 @@ export default function Entry() {
       type,
       payment,
     };
-
+  
     console.log("Transaction Submitted:", transaction);
-    alert("Transaction submitted successfully!");
-
-    // Clear form fields after submission
+  
     setTitle("");
     setAmount("");
     setDesc("");
@@ -36,7 +40,10 @@ export default function Entry() {
     setCategory("");
     setType("");
     setPayment("");
+  
+    alert("Transaction submitted successfully!");
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-800 flex items-center justify-center">
@@ -47,6 +54,7 @@ export default function Entry() {
           type="text"
           placeholder="Enter Title"
           value={title}
+          required
           className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           onChange={(e) => setTitle(e.target.value)}
         />

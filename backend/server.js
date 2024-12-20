@@ -1,10 +1,10 @@
 const admin = require("firebase-admin");
 const express = require("express");
 const cors = require("cors");
-var serviceAccount = require("./spendycredit.json");
+// var serviceAccount = require("./spendycredit.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert('./spendynew.json'),
 });
 
 const app = express();
